@@ -726,11 +726,10 @@ body.paneOpen .mouseNote{display:none}
   [(-455-290)/2,(-290-125)/2].forEach(function(cx){ box(L.wall,M.concrete,cx-25,0,0,50,50,50); });
   // compost bin in the set-back corner of the wall, west of the climbers' block
   (function(){
-    // twice the original size: about 1.41 x 1.41 at the base, 1.92 high with the lid; fills the 1.50 x 1.50 corner
-    var cm=new THREE.MeshLambertMaterial({color:0x2f3431}), cx=-615, cz=-78;
-    var bin=new THREE.Mesh(new THREE.CylinderGeometry(80,100,176,4),cm); bin.rotation.y=Math.PI/4; bin.position.set(cx,88,cz); L.wall.add(bin);
-    var lid=new THREE.Mesh(new THREE.CylinderGeometry(72,86,16,4),new THREE.MeshLambertMaterial({color:0x3b413d})); lid.rotation.y=Math.PI/4; lid.position.set(cx,184,cz); L.wall.add(lid);
-    box(L.wall,new THREE.MeshLambertMaterial({color:0x252926}),cx-30,12,cz+70.6,60,44,1.5);   // bottom hatch for taking out compost
+    var cm=new THREE.MeshLambertMaterial({color:0x2f3431}), cx=-615, cz=-80;
+    var bin=new THREE.Mesh(new THREE.CylinderGeometry(40,50,88,4),cm); bin.rotation.y=Math.PI/4; bin.position.set(cx,44,cz); L.wall.add(bin);
+    var lid=new THREE.Mesh(new THREE.CylinderGeometry(36,43,8,4),new THREE.MeshLambertMaterial({color:0x3b413d})); lid.rotation.y=Math.PI/4; lid.position.set(cx,92,cz); L.wall.add(lid);
+    box(L.wall,new THREE.MeshLambertMaterial({color:0x252926}),cx-15,6,cz+35.2,30,22,1.5);   // bottom hatch for taking out compost
   })();
   tag('climbers');
 
@@ -1053,7 +1052,7 @@ body.paneOpen .mouseNote{display:none}
     dim([-262,0,425],[-262,80,425],[0,0,1],'0.80',[-14,0,0]);         // planter height
     dim([-250,95,425],[-10,95,425],[0,1,0],'2.40',[0,8,0]);           // planter length
     dim([-530,0,8],[-530,500,8],[0,0,1],'5.00 מ׳',[-16,0,0]);         // concrete wall height
-    dim([-700,0,-78],[-700,192,-78],[0,0,1],'1.92',[-14,0,0]);         // compost bin height, just west of the (now larger) bin
+    dim([-668,0,-80],[-668,96,-80],[0,0,1],'0.95',[-14,0,0]);         // compost bin height
     dim([1528,0,298],[1528,210,298],[0,0,1],'2.10',[-14,0,0]);        // lumber rack height
     dim([1600,0,540],[1600,378,540],[1,0,0],'3.80 מ׳',[0,0,16]);      // clear height under the canopy at the south edge
     dim([-40,262,185],[0,262,185],[0,1,0],'0.40 מ׳',[0,9,0]);          // roof overhang, west
@@ -1137,7 +1136,7 @@ body.paneOpen .mouseNote{display:none}
     callout('דלת זכוכית כפולה',[1220,150,-200],[1220,265,-120]);
     callout('ארוניות',[1392,160,-131],[1392,250,-60]);
     callout('מתקן אחסון קרשים 4.80',[1500,200,40],[1420,270,90]);
-    callout('קומפוסטר',[-615,140,-12],[-615,240,70]);
+    callout('קומפוסטר',[-615,70,-50],[-615,150,60]);
     callout('נישה בקיר',[520,360,-48],[520,392,40]);
   })();
 
