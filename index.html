@@ -80,8 +80,11 @@ body.paneOpen .head{display:none}
 .mouseNote .mnHead{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 6px}
 .mouseNote .mnT{font-weight:700;font-size:.86rem}
 .mouseNote button{pointer-events:auto;min-height:0;padding:3px 10px;font-size:.75rem}
-.mouseNote.closed dl{display:none}
+/* closed: only a small "how to navigate" button is left in the corner */
+.mouseNote.closed{padding:0;background:none;border:0;backdrop-filter:none}
+.mouseNote.closed dl,.mouseNote.closed .mnT{display:none}
 .mouseNote.closed .mnHead{margin:0}
+.mouseNote.closed button{font-size:.82rem;padding:6px 12px;background:var(--panel);backdrop-filter:blur(8px)}
 .mouseNote dl{display:grid;grid-template-columns:auto auto;gap:3px 14px;margin:0}
 .mouseNote dt{font-weight:500;color:var(--muted)}
 .mouseNote dd{margin:0}
@@ -136,7 +139,7 @@ body.paneOpen .mouseNote{display:none}
 <body>
 <div id="stage" aria-label="מודל תלת־ממד של החממה. גוררים כדי לסובב"></div>
 <div class="mouseNote intro" id="mouseNote">
-  <div class="mnHead"><span class="mnT">איך זזים במודל</span><button type="button" id="mnToggle" aria-expanded="true">קפל הסברים</button></div>
+  <div class="mnHead"><span class="mnT">איך זזים במודל</span><button type="button" id="mnToggle" aria-expanded="true">סגור ✕</button></div>
   <dl>
     <dt>סיבוב סביב המודל</dt><dd>גרירה עם הלחצן השמאלי</dd>
     <dt class="hot">הזזה</dt><dd class="hot">גרירה עם הלחצן <b>הימני</b></dd>
@@ -1178,7 +1181,7 @@ body.paneOpen .mouseNote{display:none}
     (function(){
       var n=document.getElementById('mouseNote'), b=document.getElementById('mnToggle');
       function set(closed){
-        n.classList.toggle('closed',closed); b.setAttribute('aria-expanded',closed?'false':'true'); b.textContent=closed?'פתח הסברים':'קפל הסברים';
+        n.classList.toggle('closed',closed); b.setAttribute('aria-expanded',closed?'false':'true'); b.textContent=closed?'איך לנווט?':'סגור ✕';
         try{ localStorage.setItem('moveHelpClosed',closed?'1':'0'); }catch(e){}
       }
       var saved=null; try{ saved=localStorage.getItem('moveHelpClosed'); }catch(e){}
