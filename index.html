@@ -373,13 +373,13 @@ body.paneOpen .mouseNote{display:none}
 
   // ground slab
   var WX=-690; // west boundary: the west fence starts where the 1.50 m of wall ends
-  var EX=LEN+500; // east boundary: the floor runs 5.00 m east of the end of the concrete wall
-  var slab=box(scene,M.floor,WX,-12,0,EX-WX,12,505);
-  box(scene,M.floor,LEN,-12,-200,EX-LEN,12,200); // past the wall's east end the floor also runs 2.00 m north
+  var EX=LEN+560; // east boundary: measured 5.60 from the niche west of the glass door to the east fence
+  var slab=box(scene,M.floor,WX,-12,0,EX-WX,12,402);   // measured: 4.00 from the greenhouse wall to the south fence
+  box(scene,M.floor,LEN,-12,-160,EX-LEN,12,160); // east area runs 1.60 north of the wall line (glass-door wall 5.60 from the fence)
   // the yard is raised: under the south fence a 4.00 m retaining wall drops to a flat concrete area 4.00 m wide
-  box(L.wall,new THREE.MeshLambertMaterial({color:0xa3a39e}),WX,-400,505,EX-WX,400,30);          // retaining wall, grey concrete
-  box(scene,new THREE.MeshLambertMaterial({color:0xd8d5ce}),WX,-400,-270,EX-WX,388,775);           // fill under the yard, so the ends read solid
-  box(scene,new THREE.MeshLambertMaterial({color:0xc4c3bd}),WX,-412,535,EX-WX,12,600);              // lower concrete floor, 6.00 m wide
+  box(L.wall,new THREE.MeshLambertMaterial({color:0xa3a39e}),WX,-400,402,EX-WX,400,30);          // retaining wall, grey concrete
+  box(scene,new THREE.MeshLambertMaterial({color:0xd8d5ce}),WX,-400,-270,EX-WX,388,672);           // fill under the yard, so the ends read solid
+  box(scene,new THREE.MeshLambertMaterial({color:0xc4c3bd}),WX,-412,432,EX-WX,12,600);              // lower concrete floor, 6.00 m wide
   var westFloor=box(scene,M.floor,WX,-12,-150,-540-WX,12,150); // floor in the set-back corner west of the climbers' block // concrete floor starts at the wall face and runs 5 m out; nothing behind the wall
   box(scene,M.floor,500,-12,-50,40,12,50); // floor inside the niche
   box(scene,M.floor,-40,-12,-50,40,12,50); // floor inside the added niche
@@ -396,17 +396,17 @@ body.paneOpen .mouseNote{display:none}
   box(L.wall,M.concrete,-540,0,-150,70,500,80);
   box(L.wall,M.concrete,-690,0,-220,220,500,70);
   // east of the wall's end: a 5 m high wall wraps the 2.00 m deep floor area, from the existing wall to the east fence
-  box(L.wall,M.concrete,LEN-70,0,-200,70,500,130);          // west side of the area, joins the existing wall
+  box(L.wall,M.concrete,LEN-70,0,-160,70,500,90);          // west side of the area, joins the existing wall
   // north side, up to the east fence line, with an opening for a double glass door (1.60 x 2.30)
-  box(L.wall,M.concrete,LEN-70,0,-270,1140-(LEN-70),500,70);
-  box(L.wall,M.concrete,1300,0,-270,LEN+500-1300,500,70);
-  box(L.wall,M.concrete,1140,230,-270,160,270,70);
+  box(L.wall,M.concrete,LEN-70,0,-230,1140-(LEN-70),500,70);
+  box(L.wall,M.concrete,1300,0,-230,EX-1300,500,70);
+  box(L.wall,M.concrete,1140,230,-230,160,270,70);
   (function(){
     var alu=new THREE.MeshLambertMaterial({color:0x3b4045}), glass=new THREE.MeshLambertMaterial({color:0xbfe0ef,transparent:true,opacity:0.32,side:THREE.DoubleSide,depthWrite:false});
-    box(L.wall,alu,1140,0,-270,4,230,70); box(L.wall,alu,1296,0,-270,4,230,70); box(L.wall,alu,1140,226,-270,160,4,70);   // frame lining
-    box(L.wall,new THREE.MeshLambertMaterial({color:0x3a3530}),1140,0,-300,160,230,30);                                  // dark room behind
+    box(L.wall,alu,1140,0,-230,4,230,70); box(L.wall,alu,1296,0,-230,4,230,70); box(L.wall,alu,1140,226,-230,160,4,70);   // frame lining
+    box(L.wall,new THREE.MeshLambertMaterial({color:0x3a3530}),1140,0,-260,160,230,30);                                  // dark room behind
     function leaf(hx,dir,open){
-      var g=new THREE.Group(); g.position.set(hx,0,-202);
+      var g=new THREE.Group(); g.position.set(hx,0,-162);
       function part(x0,y0,w,h){ var m=new THREE.Mesh(new THREE.BoxGeometry(w,h,4),alu); m.position.set(dir*(x0+w/2),y0+h/2,0); g.add(m); }
       part(0,0,5,225); part(73,0,5,225); part(5,0,68,8); part(5,217,68,8);
       var p=new THREE.Mesh(new THREE.PlaneGeometry(68,209),glass); p.position.set(dir*39,112.5,0); g.add(p);
@@ -664,7 +664,7 @@ body.paneOpen .mouseNote{display:none}
     box(g,brakeM,cx+3,7.5,cz-1.5,4,1,3);                      // brake pedal
   }
   function planter(x0,len){
-    var g=L.tables, z0=430, W=70, yb=45, t=2.5, bh=17.5;
+    var g=L.tables, z0=327, W=70, yb=45, t=2.5, bh=17.5;
     // two boards high on every side
     [0,bh].forEach(function(dy){
       box(g,M.wood,x0,yb+dy,z0,len,bh,t); box(g,M.wood,x0,yb+dy,z0+W-t,len,bh,t);
@@ -758,9 +758,9 @@ body.paneOpen .mouseNote{display:none}
     var np=Math.max(1,Math.round(len/250));
     for(var k=0;k<=np;k++){ var tp=k*len/np, p=new THREE.Mesh(new THREE.BoxGeometry(6,hs+4,6),fenceM); p.position.set(x0+ux*tp,(hs+4)/2,z0+uz*tp); p.rotation.y=ang; fenceG.add(p); }
   }
-  fence(WX,503,EX,503,240);        // south, behind the planters, full length
-  fence(EX,-200,EX,503,240);       // east, continuing the south fence
-  fence(WX,-150,WX,503,140);       // west, 1.40 m
+  fence(WX,400,EX,400,240);        // south, behind the planters, full length
+  fence(EX,-160,EX,400,240);       // east, continuing the south fence
+  fence(WX,-150,WX,400,140);       // west, 1.40 m
   tag('fence');
 
   // canopy over the east area: 7 cm insulated panels (drawn see-through dark grey), on 10x10 steel posts.
@@ -773,7 +773,7 @@ body.paneOpen .mouseNote{display:none}
     var S=0.04, ang=Math.atan(S), yb=function(z){ return 400-S*z; };
     var pm=new THREE.MeshLambertMaterial({color:0x3a3f44,transparent:true,opacity:0.5,side:THREE.DoubleSide,depthWrite:false});
     var sm=new THREE.MeshLambertMaterial({color:0x58b06a}), seamM=new THREE.LineBasicMaterial({color:0x2a2e31});
-    var Z1=583, XW=LEN-200, XE=EX+80;
+    var Z1=480, XW=LEN-200, XE=EX+80;
     function panel(x0,x1,z0,z1){
       var d=(z1-z0)/Math.cos(ang), zc=(z0+z1)/2;
       var m=new THREE.Mesh(new THREE.BoxGeometry(x1-x0,7,d),pm); m.rotation.x=ang; m.position.set((x0+x1)/2,yb(zc)+3.5,zc); m.renderOrder=2; canopyPanels.add(m);
@@ -781,29 +781,29 @@ body.paneOpen .mouseNote{display:none}
       if(seams.length) canopyPanels.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(seams),seamM));
     }
     panel(XW,LEN,0,Z1);       // part over the greenhouse, from the main wall
-    panel(LEN,XE,-200,Z1);    // the east area, from the north wall
+    panel(LEN,XE,-160,Z1);    // the east area, from the north wall
     // no posts in the open area: the north side hangs on the concrete walls, posts only on the fence lines
     function slopedBar(x,w,h,z0,z1,top){   // steel bar running north-south under the slope, its top 'top' cm under the panel
       var d=(z1-z0)/Math.cos(ang), zc=(z0+z1)/2, m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),sm);
       m.rotation.x=ang; m.position.set(x,yb(zc)-top-h/2,zc); L.roof.add(m);
     }
     // purlins east-west, right under the panels, about every 1.2 m
-    for(var z=-195;z<=Z1-3;z+=124){
+    for(var z=-155;z<=Z1-3;z+=124){
       var x0=(z<0)?LEN:XW; box(L.roof,sm,x0,yb(z)-8,z-2,XE-x0,8,4);
     }
     box(L.roof,sm,XW,yb(Z1-3)-8,Z1-5,XE-XW,8,4);
     // main rafters north-south (10x12), from the wall ledger to the south beam on the fence line
-    [XW+5,LEN+5,1210,1375].forEach(function(x){ slopedBar(x,8,12,(x<LEN)?0:-200,Z1-5,8); });
-    slopedBar(EX,10,20,-200,Z1-5,8);                       // east beam, on the east fence line
-    box(L.roof,sm,XW,yb(503)-40,498,XE-XW,20,10);         // south beam, on the south fence line
+    [XW+5,LEN+5,1210,1375].forEach(function(x){ slopedBar(x,8,12,(x<LEN)?0:-160,Z1-5,8); });
+    slopedBar(EX,10,20,-160,Z1-5,8);                       // east beam, on the east fence line
+    box(L.roof,sm,XW,yb(400)-40,395,XE-XW,20,10);         // south beam, on the south fence line
     // posts 10x10 on the fence lines only (the south ones stand in the 10 cm gaps between planters or past them)
-    [[995,503],[1265,503],[EX,503],[EX,150]].forEach(function(p){
-      var top=(p[1]===503)?yb(503)-40:yb(p[1])-28;
+    [[995,400],[1265,400],[EX,400],[EX,120]].forEach(function(p){
+      var top=(p[1]===400)?yb(400)-40:yb(p[1])-28;
       box(L.roof,sm,p[0]-5,0,p[1]-5,10,top,10); box(L.roof,M.steel,p[0]-10,0,p[1]-10,20,1,20);
     });
     // ledgers fixed to the concrete walls, carrying the north ends of the rafters
     box(L.roof,sm,XW,yb(0)-30,0,LEN-XW,10,5);
-    box(L.roof,sm,LEN,yb(-200)-30,-200,EX-LEN,10,5);
+    box(L.roof,sm,LEN,yb(-160)-30,-160,EX-LEN,10,5);
   })();
   tag('canopy');
 
@@ -813,15 +813,15 @@ body.paneOpen .mouseNote{display:none}
     var cushA=new THREE.MeshLambertMaterial({color:0xc89b3c}), cushB=new THREE.MeshLambertMaterial({color:0xb5653e}), pil=new THREE.MeshLambertMaterial({color:0x5f7a6a});
     // bench along the south fence, 1.60 long, starting right after the last planter; its east end butts against the second bench (closed L)
     // (benches swapped: the long one now runs along the south fence, the short one closes the L on the east)
-    box(g,M.wood,1050,0,415,240,25,80); box(g,cushB,1050,25,415,240,15,80);
-    [1052,1132,1212].forEach(function(x){ var b=new THREE.Mesh(new THREE.BoxGeometry(76,40,14),pil); b.position.set(x+38,60,485); b.rotation.x=-0.18; g.add(b); });
+    box(g,M.wood,1050,0,312,240,25,80); box(g,cushB,1050,25,312,240,15,80);
+    [1052,1132,1212].forEach(function(x){ var b=new THREE.Mesh(new THREE.BoxGeometry(76,40,14),pil); b.position.set(x+38,60,382); b.rotation.x=-0.18; g.add(b); });
     // second bench, 2.40 long, running north from the south end; a wooden back panel behind it
-    box(g,M.wood,1290,0,335,80,25,160); box(g,cushA,1290,25,335,80,15,160);
-    box(g,M.wood,1370,0,335,5,85,160);
-    [375,455].forEach(function(z){ var b=new THREE.Mesh(new THREE.BoxGeometry(14,40,76),pil); b.position.set(1360,60,z); b.rotation.z=0.18; g.add(b); });
+    box(g,M.wood,1290,0,232,80,25,160); box(g,cushA,1290,25,232,80,15,160);
+    box(g,M.wood,1370,0,232,5,85,160);
+    [272,352].forEach(function(z){ var b=new THREE.Mesh(new THREE.BoxGeometry(14,40,76),pil); b.position.set(1360,60,z); b.rotation.z=0.18; g.add(b); });
     // low table in the inside corner of the L
-    box(g,M.woodDark,1175,36,320,100,4,80);
-    [[1178,323],[1267,323],[1178,392],[1267,392]].forEach(function(p){ box(g,M.woodDark,p[0],0,p[1],5,36,5); });
+    box(g,M.woodDark,1175,36,217,100,4,80);
+    [[1178,220],[1267,220],[1178,289],[1267,289]].forEach(function(p){ box(g,M.woodDark,p[0],0,p[1],5,36,5); });
   })();
 
   // five students, 1.50-1.70 m: three sitting on the benches, two standing
@@ -830,16 +830,16 @@ body.paneOpen .mouseNote{display:none}
       var p=human(o), s=h/175; p.scale.setScalar(s);
       p.position.set(x,o.sit?seatY-47*s:0,z); p.rotation.y=ry; L.doors.add(p);
     }
-    kid({skin:0xd8ad8f,top:0x3f6f9e,bottom:0x2f3540,hair:0x2a1d16,shoes:0xe8e8e8,sit:true},160,1110,455,Math.PI/2,40);
-    kid({skin:0xb88566,top:0xd9c27a,bottom:0x4a5560,hair:0x3a2618,shoes:0x333333,sit:true,pony:true},155,1215,455,Math.PI/2,40);
-    kid({skin:0xe0b89a,top:0x7a4d6a,bottom:0x3a3f52,hair:0x1f1712,shoes:0xdddddd,sit:true},165,1330,375,Math.PI,40);
+    kid({skin:0xd8ad8f,top:0x3f6f9e,bottom:0x2f3540,hair:0x2a1d16,shoes:0xe8e8e8,sit:true},160,1110,352,Math.PI/2,40);
+    kid({skin:0xb88566,top:0xd9c27a,bottom:0x4a5560,hair:0x3a2618,shoes:0x333333,sit:true,pony:true},155,1215,352,Math.PI/2,40);
+    kid({skin:0xe0b89a,top:0x7a4d6a,bottom:0x3a3f52,hair:0x1f1712,shoes:0xdddddd,sit:true},165,1330,272,Math.PI,40);
     kid({skin:0xc9977a,top:0x5b8a5a,bottom:0x3b4048,hair:0x2b1e17,shoes:0x2b2b2b},170,985,230,-(Math.PI/2+0.6),0);
     kid({skin:0xd4a487,top:0xe0e4e8,bottom:0x5a4a6a,hair:0x5a3a22,shoes:0x8a6a5a,pony:true},152,1125,195,-Math.PI/2,0);
   })();
   // a student standing at the westernmost planter, tending it
   (function(){
     var p=human({skin:0xd9ab8c,top:0xe07a5f,bottom:0x3d4a5c,hair:0x3a2416,shoes:0xf0f0f0,pony:true,reach:true});
-    p.scale.setScalar(160/175); p.position.set(-130,0,398); p.rotation.y=-Math.PI/2; L.doors.add(p);
+    p.scale.setScalar(160/175); p.position.set(-130,0,295); p.rotation.y=-Math.PI/2; L.doors.add(p);
   })();
   tag('lounge');
 
@@ -883,15 +883,15 @@ body.paneOpen .mouseNote{display:none}
     function vine(type,vx,k){
       var top=150+rnd()*75, lc={pea:0x7fb85a,glory:0x3f7d3a,nast:0x6aa84f}[type], prev=null;
       for(var yy=80;yy<top;yy+=4){
-        var px=vx+Math.sin(yy*0.05+k)*6, p=new THREE.Vector3(px,yy,499.5);
+        var px=vx+Math.sin(yy*0.05+k)*6, p=new THREE.Vector3(px,yy,396.5);
         if(prev) stemPts.push(prev,p); prev=p;
         var ls=type==='nast'?4.0:3.2;
-        for(var q=0;q<5;q++){ put(ball,lc,px+(rnd()-0.5)*20,yy+(rnd()-0.5)*7,494+rnd()*7,ls*(1+rnd()*0.5),ls*(type==='nast'?0.9:0.6),1.0,0,rnd()*3); }   // denser and fuller
+        for(var q=0;q<5;q++){ put(ball,lc,px+(rnd()-0.5)*20,yy+(rnd()-0.5)*7,391+rnd()*7,ls*(1+rnd()*0.5),ls*(type==='nast'?0.9:0.6),1.0,0,rnd()*3); }   // denser and fuller
         if(rnd()<0.14){
           var fc=type==='pea'?(rnd()<0.5?0xf5f2ff:0xb07ad0):type==='glory'?0x5a62d8:0xf0782a, fs=type==='glory'?2.6:1.9;
-          put(ball,fc,px+(rnd()-0.5)*10,yy,501.2,fs,fs,0.8);
+          put(ball,fc,px+(rnd()-0.5)*10,yy,398.2,fs,fs,0.8);
         }
-        if(type==='pea' && rnd()<0.12) put(ball,0x8ec653,px+(rnd()-0.5)*8,yy-2,500.6,0.9,3.4,0.9,0,rnd()-0.5);
+        if(type==='pea' && rnd()<0.12) put(ball,0x8ec653,px+(rnd()-0.5)*8,yy-2,397.6,0.9,3.4,0.9,0,rnd()-0.5);
       }
     }
     var crops=['lettuce','kale','herb','tomato','flower','pepper','redLettuce','chard'], vines=['pea','glory','pea','nast'], vk=0;
@@ -901,7 +901,7 @@ body.paneOpen .mouseNote{display:none}
         var type=crops[ci%crops.length]; ci++;
         var w=(type==='tomato'||type==='pepper')?30:24;
         if(x+w>x1) break;
-        plant(type,x+w/2,77.5,445); plant(type,x+w/2+(rnd()-0.5)*3,77.5,467);
+        plant(type,x+w/2,77.5,342); plant(type,x+w/2+(rnd()-0.5)*3,77.5,364);
         x+=w+5;
       }
       for(var vx=x0+12;vx<x1-8;vx+=26){ vine(vines[vk%4],vx,vk); vk++; }
@@ -942,7 +942,7 @@ body.paneOpen .mouseNote{display:none}
   // passion flower in a large terracotta pot, halfway between the planters and the west fence,
   // taking over the empty stretch of the south fence
   (function(){
-    var PX=(WX+(-250))/2, PZ=476, d=new THREE.Object3D(), ball=new THREE.SphereGeometry(1,8,6), groups={};
+    var PX=(WX+(-250))/2, PZ=373, d=new THREE.Object3D(), ball=new THREE.SphereGeometry(1,8,6), groups={};
     pot(PX,PZ);
     function put(color,x,y,z,sx,sy,sz,rz){
       var b=groups[color]||(groups[color]=[]);
@@ -950,21 +950,21 @@ body.paneOpen .mouseNote{display:none}
     }
     var stemM=new THREE.MeshLambertMaterial({color:0x4d6a2f}), x0=WX+8, x1=-262, n=13;
     function leafAt(x,y){
-      put(rnd()<0.6?0x2f6a2c:0x3c7a34,x,y,498.5+rnd()*2.5,3.6+rnd()*1.4,3.2+rnd()*1.2,0.7,rnd()*3);
+      put(rnd()<0.6?0x2f6a2c:0x3c7a34,x,y,395.5+rnd()*2.5,3.6+rnd()*1.4,3.2+rnd()*1.2,0.7,rnd()*3);
       var r=rnd();
-      if(r<0.07){ var fx=x+(rnd()-0.5)*6, fy=y+(rnd()-0.5)*6; put(0xf2f0f6,fx,fy,501.4,3.2,3.2,0.6); put(0x6a3a9a,fx,fy,502,1.7,1.7,0.8); }   // flower: white petals, purple corona
-      else if(r<0.11){ put(rnd()<0.6?0x5a2e5a:0xd9b63a,x+(rnd()-0.5)*6,y-3,501,2.8,3.2,2.8); }                                     // fruit
+      if(r<0.07){ var fx=x+(rnd()-0.5)*6, fy=y+(rnd()-0.5)*6; put(0xf2f0f6,fx,fy,398.4,3.2,3.2,0.6); put(0x6a3a9a,fx,fy,399,1.7,1.7,0.8); }   // flower: white petals, purple corona
+      else if(r<0.11){ put(rnd()<0.6?0x5a2e5a:0xd9b63a,x+(rnd()-0.5)*6,y-3,398,2.8,3.2,2.8); }                                     // fruit
     }
     for(var i=0;i<n;i++){
       var ex=x0+i*(x1-x0)/(n-1), ey=190+rnd()*45;
-      var pts=[new THREE.Vector3(PX+(rnd()-0.5)*10,44,PZ+5),new THREE.Vector3(PX+(ex-PX)*0.1,80,500),
-               new THREE.Vector3(PX+(ex-PX)*0.45+(rnd()-0.5)*20,80+(ey-80)*0.45,500),new THREE.Vector3(PX+(ex-PX)*0.8,80+(ey-80)*0.8,499.5),new THREE.Vector3(ex,ey,499.5)];
+      var pts=[new THREE.Vector3(PX+(rnd()-0.5)*10,44,PZ+5),new THREE.Vector3(PX+(ex-PX)*0.1,80,397),
+               new THREE.Vector3(PX+(ex-PX)*0.45+(rnd()-0.5)*20,80+(ey-80)*0.45,397),new THREE.Vector3(PX+(ex-PX)*0.8,80+(ey-80)*0.8,396.5),new THREE.Vector3(ex,ey,396.5)];
       var c=new THREE.CatmullRomCurve3(pts); veg.add(new THREE.Mesh(new THREE.TubeGeometry(c,40,0.6,5,false),stemM));
       for(var t=0.12;t<=1;t+=0.012){ var p=c.getPoint(t); leafAt(p.x+(rnd()-0.5)*10,p.y+(rnd()-0.5)*8); leafAt(p.x+(rnd()-0.5)*10,p.y+(rnd()-0.5)*8); }
     }
     // runners along the top rail and through the middle, so the whole stretch is covered
     [226,160,115].forEach(function(ry){
-      var c=new THREE.CatmullRomCurve3([new THREE.Vector3(x0,ry,499.5),new THREE.Vector3((x0+x1)/2,ry+6,499.5),new THREE.Vector3(x1,ry-4,499.5)]);
+      var c=new THREE.CatmullRomCurve3([new THREE.Vector3(x0,ry,396.5),new THREE.Vector3((x0+x1)/2,ry+6,396.5),new THREE.Vector3(x1,ry-4,396.5)]);
       veg.add(new THREE.Mesh(new THREE.TubeGeometry(c,40,0.5,5,false),stemM));
       for(var t=0;t<=1;t+=0.004){ var p=c.getPoint(t); leafAt(p.x+(rnd()-0.5)*8,p.y+(rnd()-0.5)*12); }
     });
@@ -980,25 +980,25 @@ body.paneOpen .mouseNote{display:none}
     var seam=new THREE.MeshLambertMaterial({color:0x2a2e31});
     [[0xe3b52f,1322],[0x4f8f4a,1393]].forEach(function(c){
       var m=new THREE.MeshLambertMaterial({color:c[0]}), x=c[1];
-      box(L.tables,M.steel,x+3,0,-197,63,9,51);               // plinth
-      box(L.tables,m,x,9,-200,69,216,69);                    // body, 69 x 69 x 225 (1.5x)
-      box(L.tables,seam,x+34,15,-131,1.2,204,0.6);          // gap between the two doors
-      [x+27,x+40.5].forEach(function(hx){ box(L.tables,M.galv,hx,120,-130.4,1.8,21,1.5); });   // handles
+      box(L.tables,M.steel,x+3,0,-157,63,9,51);               // plinth
+      box(L.tables,m,x,9,-160,69,216,69);                    // body, 69 x 69 x 225 (1.5x)
+      box(L.tables,seam,x+34,15,-91,1.2,204,0.6);          // gap between the two doors
+      [x+27,x+40.5].forEach(function(hx){ box(L.tables,M.galv,hx,120,-90.4,1.8,21,1.5); });   // handles
     });
   })();
 
   // lumber rack on the east fence: steel uprights with arms at three heights, boards lying on them
   (function(){
-    var st=new THREE.MeshLambertMaterial({color:0x50565c}), x1=1537;
+    var st=new THREE.MeshLambertMaterial({color:0x50565c}), x1=EX-3;
     // 4.80 m boards, so four uprights; arms at 95/145/195 keep the lowest boards above the bench cushions at the south end
-    [-180,-30,120,270].forEach(function(z){
+    [-140,10,170,315].forEach(function(z){
       box(L.tables,st,x1-6,0,z-3,6,210,6);                                   // upright fixed to the fence
       [95,145,195].forEach(function(y){ box(L.tables,st,x1-50,y,z-2,44,4,4); });   // arm, 50 cm deep
     });
     [95,145,195].forEach(function(y,l){
       var n=[6,5,4][l];
-      for(var i=0;i<n;i++){ box(L.tables,M.wood,x1-48+i*7.5,y+4,-195,7,2.5,480); }       // 4.80 boards lying flat
-      for(var j=0;j<n-2;j++){ box(L.tables,M.wood,x1-44+j*7.5,y+6.5,-195,7,2.5,480); } // second layer
+      for(var i=0;i<n;i++){ box(L.tables,M.wood,x1-48+i*7.5,y+4,-155,7,2.5,480); }       // 4.80 boards lying flat
+      for(var j=0;j<n-2;j++){ box(L.tables,M.wood,x1-44+j*7.5,y+6.5,-155,7,2.5,480); } // second layer
     });
   })();
 
@@ -1037,13 +1037,14 @@ body.paneOpen .mouseNote{display:none}
     dim([-10,0,162],[-10,240,162],[0,0,1],'2.40 מ׳',[-16,0,0]);     // height at the front
     dim([-10,0,3],[-10,250,3],[0,0,1],'2.50 מ׳',[-16,0,0]);         // height at the wall
     dim([15,92,58],[175,92,58],[0,1,0],'1.60 מ׳',[0,8,0]);          // table length
-    dim([EX-20,1,0],[EX-20,1,500],[1,0,0],'5.00 מ׳',[0,9,0]);
-    dim([LEN,1,30],[EX,1,30],[0,0,1],'5.00 מ׳',[0,9,0]);          // floor east of the wall's end
-    dim([LEN+250,1,-200],[LEN+250,1,0],[1,0,0],'2.00 מ׳',[0,9,0]);    // floor north of the wall line, east of the wall's end       // concrete floor, from the wall face (kept clear of the man)
+    dim([EX-20,1,-160],[EX-20,1,400],[1,0,0],'5.60 מ׳',[0,9,0]);   // measured: glass-door wall to the south fence
+    dim([LEN,1,30],[EX,1,30],[0,0,1],'5.60 מ׳',[0,9,0]);          // floor east of the wall's end
+    dim([LEN+250,1,-160],[LEN+250,1,0],[1,0,0],'1.60 מ׳',[0,9,0]);    // floor north of the wall line, east of the wall's end       // concrete floor, from the wall face (kept clear of the man)
     dim([0,485,1],[LEN,485,1],[0,1,0],'קיר בטון 10.40 מ׳',[0,-10,0]);  // full length of the concrete wall, drawn on its face near the top edge
-    dim([-262,86,430],[-262,86,500],[0,1,0],'0.70 מ׳',[0,9,0]);       // planter width
-    dim([-10,2,150],[-10,2,430],[0,1,0],'2.80 מ׳',[0,9,0]);         // path between the greenhouse front and the planters
-    dim([EX-10,0,518],[EX-10,240,518],[1,0,0],'2.40 מ׳',[0,0,14]);   // south fence height
+    dim([-262,86,327],[-262,86,397],[0,1,0],'0.70 מ׳',[0,9,0]);       // planter width
+    dim([-10,2,150],[-10,2,327],[0,1,0],'1.77 מ׳',[0,9,0]);         // path between the greenhouse front and the planters
+    dim([-40,2,0],[-40,2,400],[1,0,0],'4.00 מ׳',[0,9,0]);           // measured: greenhouse wall to the south fence
+    dim([EX-10,0,415],[EX-10,240,415],[1,0,0],'2.40 מ׳',[0,0,14]);   // south fence height
     dim([WX-10,0,250],[WX-10,140,250],[0,0,1],'1.40 מ׳',[-14,0,0]);     // west fence height
     dim([-560,2,-150],[-560,2,0],[1,0,0],'1.50 מ׳',[0,9,0]);           // wall set-back, north
     dim([-690,2,-125],[-540,2,-125],[0,0,1],'1.50 מ׳',[0,9,0]);        // wall set-back, west
@@ -1052,24 +1053,24 @@ body.paneOpen .mouseNote{display:none}
     dim([5,212,165],[207,212,165],[0,1,0],'2.02',[0,8,0]);            // post spacing
     dim([10,0,59],[10,80,59],[0,0,1],'0.80',[-12,0,0]);               // table height
     dim([500,300,3],[540,300,3],[0,1,0],'0.40',[0,9,0]);              // niche width
-    dim([-262,0,425],[-262,80,425],[0,0,1],'0.80',[-14,0,0]);         // planter height
-    dim([-250,95,425],[-10,95,425],[0,1,0],'2.40',[0,8,0]);           // planter length
+    dim([-262,0,322],[-262,80,322],[0,0,1],'0.80',[-14,0,0]);         // planter height
+    dim([-250,95,322],[-10,95,322],[0,1,0],'2.40',[0,8,0]);           // planter length
     dim([-530,0,8],[-530,500,8],[0,0,1],'5.00 מ׳',[-16,0,0]);         // concrete wall height
     dim([-668,0,-80],[-668,96,-80],[0,0,1],'0.95',[-14,0,0]);         // compost bin height
-    dim([1528,0,298],[1528,210,298],[0,0,1],'2.10',[-14,0,0]);        // lumber rack height
-    dim([1600,0,540],[1600,378,540],[1,0,0],'3.80 מ׳',[0,0,16]);      // clear height under the canopy at the south edge
+    dim([EX-12,0,330],[EX-12,210,330],[0,0,1],'2.10',[-14,0,0]);        // lumber rack height
+    dim([EX+60,0,437],[EX+60,382,437],[1,0,0],'3.80 מ׳',[0,0,16]);      // clear height under the canopy at the south edge
     dim([-40,262,185],[0,262,185],[0,1,0],'0.40 מ׳',[0,9,0]);          // roof overhang, west
     dim([LEN,262,185],[LEN+40,262,185],[0,1,0],'0.40 מ׳',[0,9,0]);    // roof overhang, east
     dim([-50,250,150],[-50,250,175],[0,1,0],'0.25 מ׳',[0,9,0]);       // roof overhang, south
     var G0=G, c0=canopyGroup.children.length; G=canopyGroup;   // canopy dimensions hide together with the canopy
     dim([1000,250,8],[1000,400,8],[1,0,0],'1.50 מ׳',[16,0,0]);        // canopy height above the greenhouse roof at the wall
     dim([LEN-200,412,20],[LEN,412,20],[0,1,0],'2.00 מ׳',[0,9,0]);    // canopy over the greenhouse
-    dim([EX+40,381,503],[EX+40,381,583],[1,0,0],'0.80 מ׳',[0,9,0]);   // canopy past the south fence
-    dim([EX,388,545],[EX+80,388,545],[0,1,0],'0.80 מ׳',[0,9,0]);      // canopy past the east fence
+    dim([EX+40,385,400],[EX+40,385,480],[1,0,0],'0.80 מ׳',[0,9,0]);   // canopy past the south fence
+    dim([EX,388,442],[EX+80,388,442],[0,1,0],'0.80 מ׳',[0,9,0]);      // canopy past the east fence
     canopyDims=canopyDims.concat(canopyGroup.children.slice(c0)); G=G0;
-    dim([1482,216,-195],[1482,216,285],[1,0,0],'קרשים 4.80 מ׳',[0,9,0]);   // board length on the lumber rack
-    dim([EX-40,-400,550],[EX-40,0,550],[1,0,0],'4.00 מ׳',[0,0,16]);       // retaining wall height
-    dim([EX-60,-396,535],[EX-60,-396,1135],[1,0,0],'6.00 מ׳',[0,9,0]);   // lower floor width
+    dim([EX-58,216,-155],[EX-58,216,325],[1,0,0],'קרשים 4.80 מ׳',[0,9,0]);   // board length on the lumber rack
+    dim([EX-40,-400,447],[EX-40,0,447],[1,0,0],'4.00 מ׳',[0,0,16]);       // retaining wall height
+    dim([EX-60,-396,432],[EX-60,-396,1032],[1,0,0],'6.00 מ׳',[0,9,0]);   // lower floor width
     // door opening
     dim([-6,216,65],[-6,216,140],[0,1,0],'0.75 מ׳',[0,9,0]);
     dim([-6,0,146],[-6,200,146],[0,0,1],'2.00 מ׳',[-14,0,0]);
@@ -1100,12 +1101,12 @@ body.paneOpen .mouseNote{display:none}
     callout('צינור גלילה',[250,12,154],[250,38,216]);
     callout('גלגלת וידית גלילה',[-26,31,152.5],[-70,62,205]);
     callout('שולחן על גלגלים',[865,80,40],[865,150,205]);
-    callout('אדנית עץ על רגליים',[620,78,470],[620,125,550]);
+    callout('אדנית עץ על רגליים',[620,78,367],[620,125,447]);
     callout('דלת, נפתחת החוצה',[-28,120,96],[-95,165,96]);
     callout('תושבת קיר לקורה',[593,238,2],[593,330,10]);
     callout('קיר בטון קיים',[240,400,0],[240,432,70]);   // on the east block, above the canopy, so the element list has the wall above the roof
     callout('עציץ חרס',[-290,30,52],[-290,90,140]);
-    callout('גדר מוסדית 2.40',[300,200,503],[300,280,560]);
+    callout('גדר מוסדית 2.40',[300,200,400],[300,280,457]);
     // a small plaque on the wall face above the roof, listing the greenhouse elements
     (function(){
       // names only, large, one under the other, on the free west block of the wall (x -540 to -40)
@@ -1133,12 +1134,12 @@ body.paneOpen .mouseNote{display:none}
     })();
     var c1=canopyGroup.children.length; G=canopyGroup;
     callout('קירוי פאנל מבודד 7 ס״מ',[1300,400,200],[1300,470,300]);
-    callout('עמוד ברזל 10×10 על קו הגדר',[1265,220,503],[1330,280,620]);
+    callout('עמוד ברזל 10×10 על קו הגדר',[1265,220,400],[1330,280,517]);
     canopyDims=canopyDims.concat(canopyGroup.children.slice(c1)); G=G0;
-    callout('פינת ישיבה',[1130,40,450],[1130,130,360]);
-    callout('דלת זכוכית כפולה',[1220,150,-200],[1220,265,-120]);
-    callout('ארוניות',[1392,160,-131],[1392,250,-60]);
-    callout('מתקן אחסון קרשים 4.80',[1500,200,40],[1420,270,90]);
+    callout('פינת ישיבה',[1130,40,347],[1130,130,257]);
+    callout('דלת זכוכית כפולה',[1220,150,-160],[1220,265,-80]);
+    callout('ארוניות',[1392,160,-91],[1392,250,-20]);
+    callout('מתקן אחסון קרשים 4.80',[EX-40,200,40],[EX-120,270,90]);
     callout('קומפוסטר',[-615,70,-50],[-615,150,60]);
     callout('נישה בקיר',[520,360,-48],[520,392,40]);
   })();
@@ -1249,7 +1250,7 @@ body.paneOpen .mouseNote{display:none}
     var trunkM=new THREE.MeshLambertMaterial({color:0x6b4f36}), pit=new THREE.MeshLambertMaterial({color:0x5a4030});
     var greens=[0x4f7f3a,0x5d8f45,0x3f6e33,0x6a9a4c].map(function(c){ return new THREE.MeshLambertMaterial({color:c}); });
     for(var x=WX+200;x<=EX-30;x+=500){
-      var z=800, g=new THREE.Group();   // far enough out that the crowns clear the canopy overhang
+      var z=697, g=new THREE.Group();   // far enough out that the crowns clear the canopy overhang
       box(g,pit,x-60,-400,z-60,120,1,120);                                                   // tree pit
       var t=new THREE.Mesh(new THREE.CylinderGeometry(10,16,660,10),trunkM); t.position.set(x,-400+330,z); g.add(t);
       [[-0.6,0.35],[0.7,0.5],[0.1,0.8]].forEach(function(b){                                 // main branches
@@ -1285,8 +1286,8 @@ body.paneOpen .mouseNote{display:none}
       }
     }
     var k=0;
-    [960,1130,1300,1470].forEach(function(x){ basket(x,488,k++); });   // south edge, just inside the fence
-    [-90,70,230,390].forEach(function(z){ basket(1522,z,k++); });       // east edge, just inside the east fence, above the lumber rack
+    [960,1130,1300,1470].forEach(function(x){ basket(x,385,k++); });   // south edge, just inside the fence
+    [-60,80,220,330].forEach(function(z){ basket(EX-18,z,k++); });       // east edge, just inside the east fence, above the lumber rack
     hangG.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(ropes),ropeM));
     Object.keys(groups).forEach(function(col){
       var im=new THREE.InstancedMesh(ball,new THREE.MeshLambertMaterial({color:Number(col)}),groups[col].length);
@@ -1308,8 +1309,8 @@ body.paneOpen .mouseNote{display:none}
       for(var i=0;i<n;i++){ d.position.set(cx,0.55,z0+2.5+i*2.5); d.scale.set(w-2.4,0.5,0.9); d.updateMatrix(); im.setMatrixAt(i,d.matrix); }
       drainG.add(im);
     }
-    drain(520,-50,500);   // niche between the two blocks behind the greenhouse
-    drain(-20,-50,500);   // niche west of the greenhouse
+    drain(520,-50,400);   // niche between the two blocks behind the greenhouse
+    drain(-20,-50,400);   // niche west of the greenhouse
   })();
   var td=document.getElementById('tgDrain');
   td.addEventListener('click',function(){
